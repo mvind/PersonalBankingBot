@@ -2,8 +2,8 @@ from tkinter import *
 from tkinter import filedialog
 import os
 
-def main():
 
+def main():
 
     uploadButton = Button(root, text="Select file", command=load_file)
     uploadButton.pack()
