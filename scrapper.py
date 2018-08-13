@@ -4,7 +4,7 @@ import os
 def scrape(file_path):
     '''
     This functions take in a loenseddel in .PDF format,
-    and extracts all salary data, and returns a list object with the information.
+    and extracts all salary data, and returns a list object with the data.
     '''
     text_data = []
     df =read_pdf(file_path, output_format='json')
@@ -25,5 +25,5 @@ def scrape(file_path):
 
     return text_data
 
-    
-scrape('lonseddel.PDF')
+
+#scrape('lonseddel.PDF')
