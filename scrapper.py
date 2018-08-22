@@ -2,6 +2,9 @@ from tabula import read_pdf
 import tabula
 import pandas as pd
 import re
+import datetime
+import time
+
 
 # Cols
 """
@@ -29,9 +32,9 @@ def scrape(file_path):
     # Scrape salary table
     df_raw = read_pdf(file_path, area=(235.13, 34.66, 757.56, 573.25))
 
-    dfparser(df_raw)
+    dfparser(df_raw, title='test1.0')
 
-def dfparser(df):
+def dfparser(df, **kwargs):
     global reObj
     r = df.shape[0]
     c = df.shape[1]
@@ -44,7 +47,10 @@ def dfparser(df):
             pass
         else:
             # First row is always the meta data for the return object
-            reObj['meta'] = row
+            title = 'undefined'
+            title = kwargs['title']
+            timestamp = datetime.datetime.today()
+            reObj['meta'] = row + [timestamp, title]
 
 
 
