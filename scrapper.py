@@ -1,5 +1,5 @@
 from tabula import read_pdf
-import tabula, re, datetime, time, regex
+import tabula, re, datetime, time, regex, json
 import pandas as pd
 
 
@@ -107,13 +107,13 @@ def dfparser(df, **kwargs):
             title = 'undefined' # Default
             title = kwargs['title']
             timestamp = datetime.datetime.today()
+            row = [e for e in row if str(e) != "nan"]
             reObj['meta'] = row + [timestamp.isoformat(), title]
 
 
     # Use json dump function to return nice formated obj
-    print(reObj)
-
-
+    with open('lon_data_db.json', 'w') as db_file:
+        json.dump(reObj, db_file, indent=4,ensure_ascii=False)
 
 if __name__ == '__main__':
     reObj = {}
