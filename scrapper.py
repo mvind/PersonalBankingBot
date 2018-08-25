@@ -4,7 +4,7 @@ import pandas as pd
 import re
 import datetime
 import time
-
+import regex
 
 # Cols
 """
@@ -43,8 +43,29 @@ def dfparser(df, **kwargs):
         row = list(df.iloc[i])
 
         if i != 0:
+            print(row)
+            s = row[0]
 
-            pass
+
+            # Get id_tag
+            try:
+                id_tag = re.search(r'^\d{4}',s, re.UNICODE).group(0)
+                if id_tag:
+                    reObj['id'] = str(id_tag)
+            except:
+                pass
+
+            # Get description
+            try:
+                desc_raw = re.split(r'\d',s)
+
+                desc = [l for l in desc_raw if l not in ('.', ',','', ', ', '-')]
+
+                print(str(desc))
+                reObj['desc'] = desc
+            except:
+                pass
+
         else:
             # First row is always the meta data for the return object
             title = 'undefined'
