@@ -1,10 +1,7 @@
 from tabula import read_pdf
-import tabula
+import tabula, re, datetime, time, regex
 import pandas as pd
-import re
-import datetime
-import time
-import regex
+
 
 def listTostr(list):
     'Take all elements for a list and return as one whitespaced str'
@@ -95,17 +92,25 @@ def dfparser(df, **kwargs):
             reObj.update({'r'+str(i): reDict})
 
             # 2. Check row elements 2-5
-            if ''
+            data3_li = []
+            for el in row[1:]:
+                if str(el) != 'nan':
+                    data3_li.append(str(el)) # Gonna be str format anyways after json formating
+
+            try:
+                reDict['value']+= data3_li
+            except KeyError:
+                reDict['value'] = li
 
         else:
             # First row is always the meta data for the return object
-            title = 'undefined'
+            title = 'undefined' # Default
             title = kwargs['title']
             timestamp = datetime.datetime.today()
-            reObj['meta'] = row + [timestamp, title]
+            reObj['meta'] = row + [timestamp.isoformat(), title]
 
 
-
+    # Use json dump function to return nice formated obj
     print(reObj)
 
 
