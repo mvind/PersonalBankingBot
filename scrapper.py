@@ -1,7 +1,7 @@
 from tabula import read_pdf
 import tabula, re, datetime, time, regex, json
 import pandas as pd
-
+from dbcontroller import uploadJson
 
 def listTostr(list):
     'Take all elements for a list and return as one whitespaced str'
@@ -112,8 +112,7 @@ def dfparser(df, **kwargs):
 
 
     # Use json dump function to return nice formated obj
-    with open('lon_data_db.json', 'w') as db_file:
-        json.dump(reObj, db_file, indent=4,ensure_ascii=False)
+    uploadJson(reObj)
 
 if __name__ == '__main__':
     reObj = {}
